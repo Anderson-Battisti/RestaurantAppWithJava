@@ -28,4 +28,14 @@ public class User
     {
         return this.password;
     }
+
+    public boolean getActive()
+    {
+        return this.active;
+    }
+
+    public void setActive(boolean active)
+    {
+        this.active = active;
+    }
 }
