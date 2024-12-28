@@ -2,6 +2,7 @@ package com.restaurantapp.RestaurantApp.user.controller;
 
 import com.restaurantapp.RestaurantApp.user.model.User;
 import com.restaurantapp.RestaurantApp.user.repository.UserRepository;
+import com.restaurantapp.RestaurantApp.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,32 +17,22 @@ public class UserController
 {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
     @PostMapping
     @ResponseBody
     public ResponseEntity<Object> addUser(@RequestBody User userBody)
     {
-        Map<String, Object> errorResponse = new HashMap<>();
+        Map<String, Object> jsonProcessed = userService.saveUser(userBody);
 
-        if (userBody.getUsername().length() >= 5 && userBody.getPassword().length() >= 5)
+        if ((Boolean) jsonProcessed.get("success"))
         {
-            userBody.setActive(true);
-            userRepository.save(userBody);
-
-            errorResponse.put("success", true);
-            errorResponse.put("message", "User added successfully!");
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(errorResponse);
+            return ResponseEntity.status(HttpStatus.OK).body(jsonProcessed);
         }
         else
         {
-            errorResponse.put("success", false);
-            errorResponse.put("message", "The body must have username and password and they should be at least 5 characters");
-
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body(errorResponse);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(jsonProcessed);
         }
     }
 }

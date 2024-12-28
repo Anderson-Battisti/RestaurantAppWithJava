@@ -19,6 +19,11 @@ public class User
     @Column(nullable = false)
     private boolean active;
 
+    public Long getId()
+    {
+        return this.id;
+    }
+
     public String getUsername()
     {
         return this.username;
