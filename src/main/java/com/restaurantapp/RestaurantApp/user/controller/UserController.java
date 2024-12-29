@@ -23,6 +23,8 @@ public class UserController
     @ResponseBody
     public ResponseEntity<Object> addUser(@RequestBody User userBody)
     {
+        System.out.println(userBody.getUsername());
+        System.out.println(userBody.getPassword());
         Map<String, Object> jsonProcessed = userService.saveUser(userBody);
 
         if ((Boolean) jsonProcessed.get("success"))

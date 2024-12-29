@@ -26,6 +26,8 @@ public class UserService
     {
         Map<String, Object> responseJson = new HashMap<>();
 
+        System.out.println(userBody.getUsername());
+        System.out.println(userBody.getPassword());
         if (userBody.getUsername() != null && userBody.getUsername().length() >= 5 &&
             userBody.getPassword() != null && userBody.getPassword().length() >= 5)
         {

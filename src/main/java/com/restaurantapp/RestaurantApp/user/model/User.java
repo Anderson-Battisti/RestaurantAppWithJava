@@ -1,6 +1,7 @@
 package com.restaurantapp.RestaurantApp.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,7 +15,7 @@ public class User
     @Column(nullable = false, length = 50)
     private String username;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false)
     private String password;
 
