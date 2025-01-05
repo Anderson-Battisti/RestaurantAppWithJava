@@ -1,0 +1,102 @@
+.btnContainer
+{
+    display: flex; 
+    justify-content: space-between; 
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.emailContainer
+{
+    display: flex; 
+    gap: 4px; 
+    justify-content: end;
+}
+
+.emailInput
+{
+    border-radius: 5px; 
+    width: 300px; 
+    background-color: darkgrey;
+}
+
+.generatePdfBtn
+{
+    display: flex; 
+    justify-content: end;
+}
+
+.downloadCsvBtn
+{
+    display: flex; 
+    justify-content: end;
+}
+
+.leftButtonsContainer
+{
+    display: flex;
+}
+
+.leftButtons
+{
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   justify-content: flex-end;
+}
+
+.rightButtonsContainer
+{
+   display: flex;
+   flex-direction: column; 
+   justify-content: end;
+   gap: 10px;
+}
+
+.rightButtons
+{
+    display: flex;
+    justify-content: end;
+}
+
+.button
+{
+    background-color: var(--dark-yellow);
+    color: var(--black);
+    border-radius: 3px;
+    font-family: 'Poppins';
+    border: none;
+    width: 170px;
+}
+
+.button:hover
+{
+    background-color: var(--primary-color);
+    color: var(--black);
+}
+
+.button:focus
+{
+    background-color: var(--white-color) !important;
+    color: var(--black) !important;
+    box-shadow: none !important;
+}
+
+.button:active
+{
+    background-color: var(--white-color) !important;
+    color: var(--black) !important;
+    box-shadow: none !important;
+}
+
+.addButton
+{
+    width: 100%;
+}
+
+.findInput
+{
+    width: 100%;
+}
+
+
