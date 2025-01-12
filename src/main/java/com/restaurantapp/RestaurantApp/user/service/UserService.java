@@ -26,8 +26,6 @@ public class UserService
     {
         Map<String, Object> responseJson = new HashMap<>();
 
-        System.out.println(userBody.getUsername());
-        System.out.println(userBody.getPassword());
         if (userBody.getUsername() != null && userBody.getUsername().length() >= 5 &&
             userBody.getPassword() != null && userBody.getPassword().length() >= 5)
         {
@@ -99,5 +97,16 @@ public class UserService
             responseJson.put("message", "An unexpected error occurred" + e.getMessage());
             return jsonFuncionalities.toJson(responseJson);
         }
+    }
+
+    public String getUserById(long id)
+    {
+        return userRepository.findById(id);
+    }
+
+    public long deleteUser(long id)
+    {
+
+        userRepository.delete();
     }
 }

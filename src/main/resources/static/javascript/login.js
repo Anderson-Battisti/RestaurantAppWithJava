@@ -1,4 +1,4 @@
-const apiUrl = "http://localhost:4000";
+const apiUrl = "http://localhost:3000";
 
 let authorization = localStorage.getItem("Authorization");
 

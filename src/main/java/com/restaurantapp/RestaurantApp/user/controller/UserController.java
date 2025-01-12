@@ -42,4 +42,10 @@ public class UserController
     {
         return userService.getAllUsers();
     }
+
+    @DeleteMapping("/deleteUser")
+    public String deleteUser(@RequestBody long id)
+    {
+        return userService.deleteUser(id);
+    }
 }
