@@ -5,21 +5,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table( name = "users" )
 public class User
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     private long id;
 
-    @Column(nullable = false, length = 50)
+    @Column( nullable = false, length = 50 )
     private String username;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Column(nullable = false)
+    @JsonProperty( access = JsonProperty.Access.WRITE_ONLY )
+    @Column( nullable = false )
     private String password;
 
-    @Column(nullable = false)
+    @Column( nullable = false )
     private boolean active;
 
     public Long getId()
@@ -42,7 +42,7 @@ public class User
         return this.active;
     }
 
-    public void setActive(boolean active)
+    public void setActive( boolean active )
     {
         this.active = active;
     }

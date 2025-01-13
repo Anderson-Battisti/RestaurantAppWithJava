@@ -22,48 +22,48 @@ public class UserService
     @Autowired
     private JsonFuncionalities jsonFuncionalities;
 
-    public Map<String, Object> saveUser(User userBody)
+    public Map<String, Object> saveUser( User userBody )
     {
         Map<String, Object> responseJson = new HashMap<>();
 
-        if (userBody.getUsername() != null && userBody.getUsername().length() >= 5 &&
-            userBody.getPassword() != null && userBody.getPassword().length() >= 5)
+        if ( userBody.getUsername() != null && userBody.getUsername().length() >= 5 &&
+            userBody.getPassword() != null && userBody.getPassword().length() >= 5 )
         {
             try
             {
-                userBody.setActive(true);
-                User savedUser = userRepository.save(userBody);
+                userBody.setActive( true );
+                User savedUser = userRepository.save( userBody );
 
-                if (savedUser.getId() > 0)
+                if ( savedUser.getId() > 0 )
                 {
-                    responseJson.put("success", true);
-                    responseJson.put("message", "The user was successfully saved on database");
+                    responseJson.put( "success", true );
+                    responseJson.put( "message", "The user was successfully saved on database" );
                     return responseJson;
                 }
                 else
                 {
-                    responseJson.put("success", false);
-                    responseJson.put("message", "An error occurred while saving the user in database");
+                    responseJson.put( "success", false );
+                    responseJson.put( "message", "An error occurred while saving the user in database" );
                     return responseJson;
                 }
             }
-            catch (DataAccessException e)
+            catch ( DataAccessException e )
             {
-                responseJson.put("success", false);
-                responseJson.put("message", "Database error: " + e.getMessage());
+                responseJson.put( "success", false );
+                responseJson.put( "message", "Database error: " + e.getMessage() );
                 return responseJson;
             }
-            catch (Exception e)
+            catch ( Exception e )
             {
-                responseJson.put("success", false);
-                responseJson.put("message", "An unexpected error occurred" + e.getMessage());
+                responseJson.put( "success", false );
+                responseJson.put( "message", "An unexpected error occurred" + e.getMessage() );
                 return responseJson;
             }
         }
         else
         {
-            responseJson.put("success", false);
-            responseJson.put("message", "The body must have username and password and they should be at least 5 characters");
+            responseJson.put( "success", false );
+            responseJson.put( "message", "The body must have username and password and they should be at least 5 characters" );
             return responseJson;
         }
     }
@@ -76,37 +76,38 @@ public class UserService
         {
             List<User> allUsers = userRepository.findAll();
 
-            if (!allUsers.isEmpty())
+            if ( ! allUsers.isEmpty() )
             {
-                return jsonFuncionalities.toJson(allUsers);
+                return jsonFuncionalities.toJson( allUsers );
             }
             else
             {
                 return "[]";
             }
         }
-        catch (DataAccessException exception)
+        catch ( DataAccessException exception )
         {
-            responseJson.put("success", false);
-            responseJson.put("message", "Database error: " + exception.getMessage());
-            return jsonFuncionalities.toJson(responseJson);
+            responseJson.put( "success", false );
+            responseJson.put( "message", "Database error: " + exception.getMessage() );
+            return jsonFuncionalities.toJson( responseJson );
         }
-        catch (Exception e)
+        catch ( Exception e )
         {
-            responseJson.put("success", false);
-            responseJson.put("message", "An unexpected error occurred" + e.getMessage());
-            return jsonFuncionalities.toJson(responseJson);
+            responseJson.put( "success", false );
+            responseJson.put( "message", "An unexpected error occurred" + e.getMessage() );
+            return jsonFuncionalities.toJson( responseJson );
         }
     }
 
-    public String getUserById(long id)
+    public boolean authenticatedSuccessfully( String username, String password )
     {
-        return userRepository.findById(id);
-    }
-
-    public long deleteUser(long id)
-    {
-
-        userRepository.delete();
+        if ( userRepository.existsByUsernameAndPassword( username, password ) )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
